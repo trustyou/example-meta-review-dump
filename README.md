@@ -1,7 +1,7 @@
 example-meta-review-dump
 ========================
 
-Demonstrates how to download a flat file containing meta-reviews of all hotels in TrustYou's database from the "trustyou-api" Amazon S3 bucket.
+Demonstrates how to download a flat file containing meta-reviews of all hotels in TrustYou's database from the "trustyou-api-us-staging" Amazon S3 bucket.
 
 Installation
 ------------

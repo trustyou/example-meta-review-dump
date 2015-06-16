@@ -25,9 +25,9 @@ def download_latest(aws_access_key, aws_secret_key, dest_folder):
 	conn = boto.connect_s3(aws_access_key, aws_secret_key)
 
 	# Select the bucket containing dumps of the TrustYou API.
-	bucket = conn.get_bucket("trustyou-api")
+	bucket = conn.get_bucket("trustyou-api-us-staging")
 
-	# The trustyou-api bucket contains snapshots of the TrustYou API at
+	# The trustyou-api-us-staging bucket contains snapshots of the TrustYou API at
 	# different points in time. They are organized in folders whose name is
 	# a timestamp.
 
