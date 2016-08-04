@@ -4,6 +4,7 @@ Demonstration of how to download a complete meta-review API dump.
 """
 
 from getpass import getpass
+import datetime
 import logging
 import os.path
 import re
@@ -33,7 +34,7 @@ def download_latest(aws_access_key, aws_secret_key, dest_folder):
 
 	logging.info("Looking for latest complete dump")
 	
-	latest_date = None
+	latest_date = str(datetime.date.min)
 	for key in bucket.list(prefix="meta-review/"):
 		done_file_match = re.match("^meta-review/([^/]+)/done$", key.key)
 		if done_file_match:
