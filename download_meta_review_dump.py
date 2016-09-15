@@ -38,7 +38,8 @@ def download_latest(aws_access_key, aws_secret_key, dest_folder):
 		done_file_match = re.match("^meta-review/([^/]+)/done$", key.key)
 		if done_file_match:
 			date = done_file_match.group(1)
-			latest_date = max(date, latest_date)
+			if latest_date is None or date > latest_date:
+				latest_date = date
 
 	assert latest_date is not None, "No complete dump folder found!"
 
