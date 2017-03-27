@@ -14,7 +14,7 @@ import boto
 def parse_args():
 	from argparse import ArgumentParser
 	argp = ArgumentParser(__doc__)
-	argp.add_argument("--dest_folder", help="Existing empty folder where files should be stored", required=True)
+	argp.add_argument("dest_folder", help="Existing empty folder where files should be stored")
 	return argp.parse_args()
 
 def download_latest(aws_access_key, aws_secret_key, dest_folder):
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 	
 	logging.info("Download latest meta-review dump to %s", args.dest_folder)
 
-	assert os.path.exists(args.dest_folder) and os.path.isdir(args.dest_folder), "Output folder does not exist!"
+	assert os.path.exists(args.dest_folder) and os.path.isdir(args.dest_folder), "Destination folder does not exist!"
 
 	aws_access_key = getpass("Please enter your AWS access key and press Enter (characters not visible): ")
 	aws_secret_key = getpass("AWS secret key: ")
