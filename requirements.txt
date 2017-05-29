@@ -1,2 +1,2 @@
 awscli
-boto
+boto3
