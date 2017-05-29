@@ -6,7 +6,7 @@ Demonstrates how to download a flat file containing meta-reviews of all hotels i
 Installation
 ------------
 
-The Python example (download_meta_review_dump.py) runs with Python 2 or 3. It uses the [boto library](https://boto.readthedocs.org/en/latest/). The example written in Bash (download_meta_review_dump.sh) needs the [AWS Command Line Interface](http://aws.amazon.com/cli/). Both can be installed by running:
+The Python example (download_meta_review_dump.py) runs with Python 2 or 3. It uses the [boto3 library](https://aws.amazon.com/sdk-for-python/). The example written in Bash (download_meta_review_dump.sh) needs the [AWS Command Line Interface](http://aws.amazon.com/cli/). Both can be installed by running:
 
 ```
 pip install -r requirements.txt
@@ -19,11 +19,12 @@ Note that you need to contact TrustYou to receive your AWS access keys and secre
 
 Download the latest meta-review dump into a folder called "meta-review-dump":
 
+Run this once to confiture your AWS access key and secret:
 ```
-aws configure # needs to be run only once
-./download_meta_review_dump.sh meta-review-dump
+aws configure
 ```
 
+Then, to download and process the latest files:
 ```
 ./download_meta_review_dump.py meta-review-dump
 ./process_meta_review_dump.py meta-review-dump/TIMESTAMP_OF_DOWNLOADED_DUMP
