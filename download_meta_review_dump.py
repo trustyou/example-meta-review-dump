@@ -3,6 +3,7 @@
 Demonstration of how to download a complete meta-review API dump.
 """
 
+import hashlib
 import logging
 import os.path
 import re
@@ -15,6 +16,16 @@ def parse_args():
 	argp = ArgumentParser(__doc__)
 	argp.add_argument("dest_folder", help="Existing empty folder where files should be stored")
 	return argp.parse_args()
+
+def md5(path):
+	"""
+	Compute MD5 hash of file. Read it in chunks, so we don't need to fix the entire file in memory.
+	"""
+	hash_md5 = hashlib.md5()
+	with open(path, "rb") as f:
+		for chunk in iter(lambda: f.read(4096), b""):
+			hash_md5.update(chunk)
+	return hash_md5.hexdigest()
 
 def download_latest(dest_folder):
 	
@@ -54,12 +65,14 @@ def download_latest(dest_folder):
 			continue
 		local_path = os.path.join(target_folder, basename)
 		if os.path.exists(local_path):
-			logging.debug("- Skipping %s, already downloaded", local_path)
+			logging.debug("- Skipping %s, already downloaded", object_summary.key)
 			continue
 		logging.debug("- Downloading %s", object_summary.key)
 		local_tmp_path = local_path + "_tmp"
 		object = object_summary.Object()
 		object.download_file(local_tmp_path)
+		expected_e_tag = '"{}"'.format(md5(local_tmp_path))  # E-Tag is returned with quotes around it by the API
+		assert expected_e_tag == object.e_tag, "Checksums don't match, download failed!"
 		os.rename(local_tmp_path, local_path)
 
 if __name__ == "__main__":
