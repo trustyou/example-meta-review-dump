@@ -29,3 +29,8 @@ Then, to download and process the latest files:
 ./download_meta_review_dump.py meta-review-dump
 ./process_meta_review_dump.py meta-review-dump/TIMESTAMP_OF_DOWNLOADED_DUMP
 ```
+
+For downloading hotel dump
+```
+./hotel_dump.py hotel-dump
+```
